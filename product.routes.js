@@ -25,5 +25,14 @@ router.get('/productswitherror', (request, response) => {
 	throw err
 });
 
-
 module.exports = router;
+
+// handle get request for path /products/id/:id
+router.get('/products/id/:id', blockSpecialBrand, (request, response) => {
+	const { id } = request.params; // Access the brand parameter from the URLа
+
+	// Filter products based on the brand parameter
+	const product = products.find(product => product.id === parseInt(id));
+
+	response.json(product); // Send the filtered products as a JSON response
+});
